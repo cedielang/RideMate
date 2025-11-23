@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.Signup"
+             Title="Signup"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <Image Source="backgroundimage.jpg"
+       Aspect="AspectFill"
+       VerticalOptions="Fill"
+       HorizontalOptions="Fill" />
+        <VerticalStackLayout>
+
+            <!-- Header -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Create New Account"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#333333"/>
+                <Label x:Name="AccountTypeLabel"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="#666666"/>
+            </VerticalStackLayout>
+
+
+            <VerticalStackLayout Spacing="15">
+
+                <!-- Full Name -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Full Name"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#333333"/>
+                    <Entry x:Name="FullNameEntry"   
+                               Placeholder="Enter your full name"
+                               BackgroundColor="White"
+                               TextColor="#333333"/>
+                </VerticalStackLayout>
+                <!-- Email -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Email Address"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#333333"/>
+                    <Entry x:Name="EmailEntry"
+                               Placeholder="Enter your email"
+                               BackgroundColor="White"
+                               TextColor="#333333"
+                               Keyboard="Email"/>
+                </VerticalStackLayout>
+
+                <!-- Password -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Password"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#333333"/>
+                    <Entry x:Name="PasswordEntry"
+                               Placeholder="Create a password"
+                               BackgroundColor="White"
+                               TextColor="#333333"
+                               IsPassword="True"/>
+                </VerticalStackLayout>
+
+                <!-- Confirm Password -->
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Confirm Password"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#333333"/>
+                    <Entry x:Name="ConfirmPasswordEntry"
+                               Placeholder="Confirm your password"
+                               BackgroundColor="White"
+                               TextColor="#333333"
+                               IsPassword="True"/>
+
+                    <!-- Sign Up Button -->
+                    <Button x:Name="SignUpButton"
+                            Text="Create Account"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            CornerRadius="10"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="OnSignUpClicked"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

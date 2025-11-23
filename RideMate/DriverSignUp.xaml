@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.DriverSignUp"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False"
+             Title="Driver Sign Up">
+    <Grid>
+        <Image Source="backgroundimage.jpg"
+           Aspect="AspectFill"
+           VerticalOptions="Fill"
+           HorizontalOptions="Fill" />
+        <ScrollView>
+            <VerticalStackLayout Spacing="20" Padding="20">
+
+                <!-- Header -->
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Create Driver Account"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#333333"/>
+                    <Label Text="Join as a Driver"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="#666666"/>
+                </VerticalStackLayout>
+
+                <!-- Personal Information -->
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Personal Information"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#333333"/>
+
+                    <!-- Full Name -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Full Name"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="FullNameEntry"   
+                           Placeholder="Enter your full name"
+                           BackgroundColor="White"
+                           TextColor="#333333"/>
+                    </VerticalStackLayout>
+
+                    <!-- Email -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Email Address"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="EmailEntry"
+                           Placeholder="Enter your email"
+                           BackgroundColor="White"
+                           TextColor="#333333"
+                           Keyboard="Email"/>
+                    </VerticalStackLayout>
+
+                    <!-- Password -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Password"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="PasswordEntry"
+                           Placeholder="Create a password"
+                           BackgroundColor="White"
+                           TextColor="#333333"
+                           IsPassword="True"/>
+                    </VerticalStackLayout>
+
+                    <!-- Confirm Password -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Confirm Password"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="ConfirmPasswordEntry"
+                           Placeholder="Confirm your password"
+                           BackgroundColor="White"
+                           TextColor="#333333"
+                           IsPassword="True"/>
+                    </VerticalStackLayout>
+
+                    <!-- License Number -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Driver's License Number"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="LicenseEntry"
+                           Placeholder="Enter your license number"
+                           BackgroundColor="White"
+                           TextColor="#333333"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+
+                <!-- Vehicle Information -->
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Vehicle Information"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#333333"/>
+
+                    <!-- Vehicle Type -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Vehicle Type"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="VehicleTypeEntry"
+                           Placeholder="e.g., Sedan, SUV, Motorcycle"
+                           BackgroundColor="White"
+                           TextColor="#333333"/>
+                    </VerticalStackLayout>
+
+                    <!-- Vehicle Model -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Vehicle Model"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="VehicleModelEntry"
+                           Placeholder="e.g., Toyota Vios 2020"
+                           BackgroundColor="White"
+                           TextColor="#333333"/>
+                    </VerticalStackLayout>
+
+                    <!-- Plate Number -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Plate Number"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#333333"/>
+                        <Entry x:Name="PlateNumberEntry"
+                           Placeholder="Enter plate number"
+                           BackgroundColor="White"
+                           TextColor="#333333"/>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+              
+
+                <!-- Sign Up Button -->
+                <Button x:Name="SignUpButton"
+                    Text="Create Driver Account"
+                    BackgroundColor="#28A745"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    Clicked="OnSignUpClicked"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

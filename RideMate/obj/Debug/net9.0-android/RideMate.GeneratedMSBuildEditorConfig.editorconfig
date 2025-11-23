@@ -1,0 +1,139 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = true
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net9.0-android
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = RideMate
+build_property.ProjectDir = C:\Users\USER\source\repos\RideMate\RideMate\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/USER/source/repos/RideMate/RideMate/ActiveRidePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.ActiveRidePage.xaml
+build_metadata.AdditionalFiles.TargetPath = ActiveRidePage.xaml
+build_metadata.AdditionalFiles.RelativePath = ActiveRidePage.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/DriverDashboard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.DriverDashboard.xaml
+build_metadata.AdditionalFiles.TargetPath = DriverDashboard.xaml
+build_metadata.AdditionalFiles.RelativePath = DriverDashboard.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/DriverSignUp.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.DriverSignUp.xaml
+build_metadata.AdditionalFiles.TargetPath = DriverSignUp.xaml
+build_metadata.AdditionalFiles.RelativePath = DriverSignUp.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/ForgotPasswordPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.ForgotPasswordPage.xaml
+build_metadata.AdditionalFiles.TargetPath = ForgotPasswordPage.xaml
+build_metadata.AdditionalFiles.RelativePath = ForgotPasswordPage.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/Login.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Login.xaml
+build_metadata.AdditionalFiles.TargetPath = Login.xaml
+build_metadata.AdditionalFiles.RelativePath = Login.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/OtpVerification.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.OtpVerification.xaml
+build_metadata.AdditionalFiles.TargetPath = OtpVerification.xaml
+build_metadata.AdditionalFiles.RelativePath = OtpVerification.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/PassengerDashboard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.PassengerDashboard.xaml
+build_metadata.AdditionalFiles.TargetPath = PassengerDashboard.xaml
+build_metadata.AdditionalFiles.RelativePath = PassengerDashboard.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/PassengerMapDashboard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.PassengerMapDashboard.xaml
+build_metadata.AdditionalFiles.TargetPath = PassengerMapDashboard.xaml
+build_metadata.AdditionalFiles.RelativePath = PassengerMapDashboard.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/PaymentPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.PaymentPage.xaml
+build_metadata.AdditionalFiles.TargetPath = PaymentPage.xaml
+build_metadata.AdditionalFiles.RelativePath = PaymentPage.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/RatingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.RatingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = RatingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = RatingPage.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/RoleSelectionPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.RoleSelectionPage.xaml
+build_metadata.AdditionalFiles.TargetPath = RoleSelectionPage.xaml
+build_metadata.AdditionalFiles.RelativePath = RoleSelectionPage.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/SendOtpPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.SendOtpPage.xaml
+build_metadata.AdditionalFiles.TargetPath = SendOtpPage.xaml
+build_metadata.AdditionalFiles.RelativePath = SendOtpPage.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/Signup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Signup.xaml
+build_metadata.AdditionalFiles.TargetPath = Signup.xaml
+build_metadata.AdditionalFiles.RelativePath = Signup.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/Views/SimpleMapView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Views.SimpleMapView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SimpleMapView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SimpleMapView.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/Resources/Raw/dist/leaflet.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Resources.Raw.dist.leaflet.css
+build_metadata.AdditionalFiles.TargetPath = Resources\Raw\dist\leaflet.css
+build_metadata.AdditionalFiles.RelativePath = Resources\Raw\dist\leaflet.css

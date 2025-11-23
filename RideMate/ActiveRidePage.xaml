@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.ActiveRidePage"
+             Title="Active Ride"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                BackgroundColor="#4CAF50"
+                Padding="20,15">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="🚗 Ride in Progress"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+                <Label x:Name="StatusLabel"
+                       Text="Driver is on the way..."
+                       FontSize="14"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Map View -->
+        <WebView x:Name="MapWebView"
+                 Grid.Row="1"/>
+
+        <!-- Bottom Info Panel -->
+        <Border Grid.Row="2"
+                BackgroundColor="White"
+                Stroke="#E0E0E0"
+                StrokeThickness="1"
+                Padding="20">
+            <VerticalStackLayout Spacing="15">
+                
+                <!-- Driver Info -->
+                <Border BackgroundColor="#F5F5F5"
+                        Padding="15"
+                        StrokeShape="RoundRectangle 10">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <Label Grid.Column="0"
+                               Text="👤"
+                               FontSize="40"
+                               VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label x:Name="DriverNameLabel"
+                                   Text="Driver Name"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+                            <Label x:Name="VehicleInfoLabel"
+                                   Text="Vehicle Info"
+                                   FontSize="14"
+                                   TextColor="#666"/>
+                            <Label x:Name="DriverPhoneLabel"
+                                   Text="Phone: +63 XXX XXX XXXX"
+                                   FontSize="14"
+                                   TextColor="#666"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Trip Info -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Border Grid.Column="0"
+                            BackgroundColor="#E3F2FD"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="⏱️ ETA"
+                                   FontSize="12"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="EtaLabel"
+                                   Text="5 mins"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#1976D2"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <Border Grid.Column="1"
+                            BackgroundColor="#FFF3E0"
+                            Padding="15"
+                            StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="💰 Fare"
+                                   FontSize="12"
+                                   TextColor="#666"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="FareLabel"
+                                   Text="₱150.00"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#F57C00"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Complete Ride Button (shown when arrived) -->
+                <Button x:Name="CompleteRideButton"
+                        Text="Complete Ride &amp; Pay"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        IsVisible="False"
+                        Clicked="OnCompleteRideClicked"/>
+
+                <!-- Cancel Button -->
+                <Button Text="Cancel Ride"
+                        BackgroundColor="#F44336"
+                        TextColor="White"
+                        FontSize="14"
+                        CornerRadius="10"
+                        HeightRequest="45"
+                        Clicked="OnCancelRideClicked"/>
+                
+            </VerticalStackLayout>
+        </Border>
+        
+    </Grid>
+    
+</ContentPage>

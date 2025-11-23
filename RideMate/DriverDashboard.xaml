@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.DriverDashboard"
+             Title="Driver Dashboard"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid RowDefinitions="300,*">
+        
+        <!-- Map Section (Top) -->
+        <Grid Grid.Row="0">
+            <WebView x:Name="MapWebView" 
+                     HeightRequest="300"
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill"/>
+            
+            <!-- Map Overlay Controls -->
+            <VerticalStackLayout VerticalOptions="End" 
+                                Padding="10"
+                                Spacing="5">
+                
+                <!-- Route Input Panel -->
+                <Border x:Name="RouteInputPanel"
+                        Background="White"
+                        Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="10"
+                        IsVisible="False">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Set Your Route"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#333"/>
+                        
+                        <Entry x:Name="DestinationEntry"
+                               Placeholder="Enter destination"
+                               FontSize="12"
+                               BackgroundColor="#F5F5F5"/>
+                        
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                            <Button Text="Set Route"
+                                    Grid.Column="0"
+                                    BackgroundColor="#4CAF50"
+                                    TextColor="White"
+                                    FontSize="12"
+                                    CornerRadius="5"
+                                    Clicked="OnSetRouteClicked"/>
+                            
+                            <Button Text="Cancel"
+                                    Grid.Column="1"
+                                    BackgroundColor="#757575"
+                                    TextColor="White"
+                                    FontSize="12"
+                                    CornerRadius="5"
+                                    Clicked="OnCancelRouteClicked"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <!-- Start Route Button -->
+                <Button x:Name="StartRouteButton"
+                        Text="🚗 Start Route"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        CornerRadius="10"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        Clicked="OnStartRouteButtonClicked"/>
+            </VerticalStackLayout>
+        </Grid>
+        
+        <!-- Dashboard Content (Bottom) -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="15" Padding="15">
+            
+            <!-- Status Toggle -->
+            <Border Stroke="#E9ECEF"
+                    Background="#F8F9FA"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Driver Status"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+                    
+                    <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
+                        <Switch x:Name="OnlineSwitch"
+                                Toggled="OnStatusToggled" />
+                        
+                        <Label x:Name="StatusLabel"
+                               Text="Offline"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#DC3545" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Earnings Summary -->
+            <Border Stroke="#E9ECEF"
+                    Background="White"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Today's Earnings"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+                    
+                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                        <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                            <Label Text="₱0.00"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#28A745" />
+                            <Label Text="Total Earned"
+                                   FontSize="12"
+                                   TextColor="#666" />
+                        </VerticalStackLayout>
+                        
+                        <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                            <Label Text="0"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#007AFF" />
+                            <Label Text="Rides Completed"
+                                   FontSize="12"
+                                   TextColor="#666" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Profile Section -->
+            <Border Stroke="#E9ECEF"
+                    Background="White"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Account"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+                    
+                    <Button Text="🚗 Vehicle Information"
+                            BackgroundColor="Transparent"
+                            TextColor="#007AFF"
+                            BorderColor="#007AFF"
+                            BorderWidth="1"
+                            CornerRadius="10"
+                            FontSize="16"
+                            Clicked="OnVehicleInfoClicked" />
+                    
+                    <Button Text="👤 Edit Profile"
+                            BackgroundColor="Transparent"
+                            TextColor="#007AFF"
+                            BorderColor="#007AFF"
+                            BorderWidth="1"
+                            CornerRadius="10"
+                            FontSize="16"
+                            Clicked="OnEditProfileClicked" />
+                    
+                    <Button Text="🚪 Logout"
+                            BackgroundColor="Transparent"
+                            TextColor="#DC3545"
+                            BorderColor="#DC3545"
+                            BorderWidth="1"
+                            CornerRadius="10"
+                            FontSize="16"
+                            Clicked="OnLogoutClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

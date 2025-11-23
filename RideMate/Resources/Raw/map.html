@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS & JS (using local files) -->
+    <link rel="stylesheet" href="dist/leaflet.css" />
+    <script src="dist/leaflet.js"></script>
+
+    <!-- Leaflet Routing Machine -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <style>
+        html, body, #map {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .custom-marker {
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        // Global variables
+        var map;
+        var routingControl;
+        var markers = {};
+        
+        // Initialize map centered on Manila
+        function initMap() {
+            map = L.map('map').setView([14.5995, 120.9842], 13);
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        }
+
+        // Add a marker to the map
+        function addMarker(id, lat, lng, label, icon) {
+            // Remove existing marker if it exists
+            if (markers[id]) {
+                map.removeLayer(markers[id]);
+            }
+
+            // Create custom icon based on type
+            var markerIcon;
+            if (icon === 'driver') {
+                markerIcon = L.divIcon({
+                    html: '<div class="custom-marker">🚗</div>',
+                    className: 'custom-div-icon',
+                    iconSize: [30, 30]
+                });
+            } else if (icon === 'passenger') {
+                markerIcon = L.divIcon({
+                    html: '<div class="custom-marker">👤</div>',
+                    className: 'custom-div-icon',
+                    iconSize: [30, 30]
+                });
+            } else if (icon === 'destination') {
+                markerIcon = L.divIcon({
+                    html: '<div class="custom-marker">🎯</div>',
+                    className: 'custom-div-icon',
+                    iconSize: [30, 30]
+                });
+            } else {
+                markerIcon = L.icon({
+                    iconUrl: 'dist/images/marker-icon.png',
+                    shadowUrl: 'dist/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41]
+                });
+            }
+
+            // Create marker
+            var marker = L.marker([lat, lng], { icon: markerIcon })
+                .bindPopup(label)
+                .addTo(map);
+
+            markers[id] = marker;
+            return true;
+        }
+
+        // Remove a marker
+        function removeMarker(id) {
+            if (markers[id]) {
+                map.removeLayer(markers[id]);
+                delete markers[id];
+                return true;
+            }
+            return false;
+        }
+
+        // Clear all markers
+        function clearMarkers() {
+            for (var id in markers) {
+                map.removeLayer(markers[id]);
+            }
+            markers = {};
+            return true;
+        }
+
+        // Set route between two points using local OSRM server
+        function setRoute(startLat, startLng, endLat, endLng) {
+            // Remove existing routing control
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // Create new routing control with local OSRM server
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(startLat, startLng),
+                    L.latLng(endLat, endLng)
+                ],
+                router: L.Routing.osrmv1({
+                    serviceUrl: 'http://localhost:5000/route/v1',
+                    profile: 'driving', // driving, walking, or cycling
+                    // Additional OSRM options
+                    useHints: false,
+                    suppressDemoServerWarning: true
+                }),
+                routeWhileDragging: false,
+                showAlternatives: false, // Set to true if you want alternative routes
+                fitSelectedRoutes: true,
+                addWaypoints: false,
+                draggableWaypoints: false,
+                lineOptions: {
+                    styles: [{ 
+                        color: '#2196F3', 
+                        weight: 6,
+                        opacity: 0.8
+                    }]
+                },
+                createMarker: function() { return null; }, // Don't create default markers
+                show: true,
+                collapsible: true
+            }).addTo(map);
+
+            return true;
+        }
+
+        // Alternative: Set route with polyline (more control)
+        function setRouteWithPolyline(startLat, startLng, endLat, endLng) {
+            // Build OSRM URL
+            var url = `http://localhost:5000/route/v1/driving/${startLng},${startLat};${endLng},${endLat}?` +
+                      `alternatives=false&steps=true&geometries=geojson&overview=full&annotations=true`;
+            
+            // Fetch route from OSRM
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                        var route = data.routes[0];
+                        var coordinates = route.geometry.coordinates;
+                        
+                        // Convert coordinates to Leaflet format [lat, lng]
+                        var latlngs = coordinates.map(coord => [coord[1], coord[0]]);
+                        
+                        // Draw polyline
+                        var polyline = L.polyline(latlngs, {
+                            color: '#2196F3',
+                            weight: 6,
+                            opacity: 0.8
+                        }).addTo(map);
+                        
+                        // Fit map to route
+                        map.fitBounds(polyline.getBounds());
+                        
+                        // Store polyline for later removal
+                        if (!window.routePolylines) {
+                            window.routePolylines = [];
+                        }
+                        window.routePolylines.push(polyline);
+                    }
+                })
+                .catch(error => {
+                    console.error('OSRM routing error:', error);
+                    // Fallback to public OSRM if localhost fails
+                    console.log('Falling back to public OSRM server...');
+                    setRoute(startLat, startLng, endLat, endLng);
+                });
+            
+            return true;
+        }
+
+        // Clear route
+        function clearRoute() {
+            // Remove routing control
+            if (routingControl) {
+                map.removeControl(routingControl);
+                routingControl = null;
+            }
+            
+            // Remove polylines
+            if (window.routePolylines) {
+                window.routePolylines.forEach(polyline => {
+                    map.removeLayer(polyline);
+                });
+                window.routePolylines = [];
+            }
+            
+            return true;
+        }
+
+        // Center map on location
+        function centerMap(lat, lng, zoom) {
+            map.setView([lat, lng], zoom || 13);
+            return true;
+        }
+
+        // Fit map to show all markers
+        function fitBounds() {
+            if (Object.keys(markers).length > 0) {
+                var group = L.featureGroup(Object.values(markers));
+                map.fitBounds(group.getBounds().pad(0.1));
+                return true;
+            }
+            return false;
+        }
+
+        // Initialize map on load
+        initMap();
+
+        // Make functions available to C#
+        window.addMarker = addMarker;
+        window.removeMarker = removeMarker;
+        window.clearMarkers = clearMarkers;
+        window.setRoute = setRoute;
+        window.setRouteWithPolyline = setRouteWithPolyline;
+        window.clearRoute = clearRoute;
+        window.centerMap = centerMap;
+        window.fitBounds = fitBounds;
+    </script>
+</body>
+</html>

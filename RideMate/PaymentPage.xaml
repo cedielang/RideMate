@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.PaymentPage"
+             Title="Payment"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Header -->
+            <Border BackgroundColor="#4CAF50"
+                    Padding="20"
+                    StrokeShape="RoundRectangle 15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="💳 Payment"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Choose your payment method"
+                           FontSize="14"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Fare Summary -->
+            <Border BackgroundColor="#FFF3E0"
+                    Stroke="#FFB74D"
+                    StrokeThickness="2"
+                    Padding="20"
+                    StrokeShape="RoundRectangle 15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Trip Fare"
+                           FontSize="16"
+                           TextColor="#666"
+                           HorizontalOptions="Center"/>
+                    <Label x:Name="FareLabel"
+                           Text="₱150.00"
+                           FontSize="36"
+                           FontAttributes="Bold"
+                           TextColor="#F57C00"
+                           HorizontalOptions="Center"/>
+                    <BoxView HeightRequest="1"
+                             Color="#FFB74D"
+                             Margin="0,10"/>
+                    <Grid ColumnDefinitions="*,Auto" RowSpacing="5">
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Base Fare"
+                               FontSize="14"
+                               TextColor="#666"/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="₱40.00"
+                               FontSize="14"
+                               TextColor="#666"/>
+                        
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Text="Distance (5.2 km)"
+                               FontSize="14"
+                               TextColor="#666"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="₱70.20"
+                               FontSize="14"
+                               TextColor="#666"/>
+                        
+                        <Label Grid.Row="2" Grid.Column="0"
+                               Text="Time (20 mins)"
+                               FontSize="14"
+                               TextColor="#666"/>
+                        <Label Grid.Row="2" Grid.Column="1"
+                               Text="₱39.80"
+                               FontSize="14"
+                               TextColor="#666"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Payment Methods -->
+            <Label Text="Select Payment Method"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="Black"/>
+
+            <!-- GCash -->
+            <Border x:Name="GCashBorder"
+                    BackgroundColor="White"
+                    Stroke="#007DFF"
+                    StrokeThickness="2"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 12">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnGCashSelected"/>
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
+                    <Image Grid.Column="0"
+                           Source="💙"
+                           WidthRequest="50"
+                           HeightRequest="50"/>
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="GCash"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <Label Text="Pay online via GCash"
+                               FontSize="14"
+                               TextColor="#666"/>
+                    </VerticalStackLayout>
+                    <Label x:Name="GCashCheck"
+                           Grid.Column="2"
+                           Text="○"
+                           FontSize="30"
+                           TextColor="#007DFF"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- Maya (PayMaya) -->
+            <Border x:Name="MayaBorder"
+                    BackgroundColor="White"
+                    Stroke="#00D632"
+                    StrokeThickness="2"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 12">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnMayaSelected"/>
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
+                    <Image Grid.Column="0"
+                           Source="💚"
+                           WidthRequest="50"
+                           HeightRequest="50"/>
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Maya"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <Label Text="Pay online via Maya (PayMaya)"
+                               FontSize="14"
+                               TextColor="#666"/>
+                    </VerticalStackLayout>
+                    <Label x:Name="MayaCheck"
+                           Grid.Column="2"
+                           Text="○"
+                           FontSize="30"
+                           TextColor="#00D632"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- Cash -->
+            <Border x:Name="CashBorder"
+                    BackgroundColor="White"
+                    Stroke="#4CAF50"
+                    StrokeThickness="2"
+                    Padding="15"
+                    StrokeShape="RoundRectangle 12">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCashSelected"/>
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
+                    <Image Grid.Column="0"
+                           Source="💵"
+                           WidthRequest="50"
+                           HeightRequest="50"/>
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Cash"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <Label Text="Pay with cash to driver"
+                               FontSize="14"
+                               TextColor="#666"/>
+                    </VerticalStackLayout>
+                    <Label x:Name="CashCheck"
+                           Grid.Column="2"
+                           Text="○"
+                           FontSize="30"
+                           TextColor="#4CAF50"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- Pay Button -->
+            <Button x:Name="PayButton"
+                    Text="Proceed to Payment"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="55"
+                    Margin="0,10,0,0"
+                    Clicked="OnPayClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

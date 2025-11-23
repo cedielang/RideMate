@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.SendOtpPage"
+             Title="Phone Verification"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <Image Source="backgroundimage.jpg"
+           Aspect="AspectFill"
+           VerticalOptions="Fill"
+           HorizontalOptions="Fill" />
+        <ScrollView>
+            <VerticalStackLayout Spacing="30" Padding="40,60,40,40">
+
+                <!-- Header -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Enter Your Phone Number"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#333"
+                       HorizontalOptions="Center" />
+
+                    <Label Text="We'll send you a verification code"
+                       FontSize="16"
+                       TextColor="#666"
+                       HorizontalOptions="Center" />
+
+                    <Label Text="🇵🇭 Philippines Only"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="#007AFF"
+                       HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- Phone Input Section -->
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Philippine Mobile Number"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#333" />
+
+                    <Label Text="Format: 09123456789 or 9123456789"
+                       FontSize="12"
+                       TextColor="#666"
+                       HorizontalOptions="Center" />
+
+
+                    <Entry x:Name="PhoneEntry"
+                           Placeholder="09123456789"
+                           PlaceholderColor="#999"
+                           TextColor="#333"
+                           FontSize="16"
+                           Keyboard="Telephone"
+                           BackgroundColor="Transparent"
+                           MaxLength="11"
+                           Margin="15,10" />
+
+                </VerticalStackLayout>
+
+                <!-- Send OTP Button -->
+                <Button x:Name="SendOtpButton"
+                    Text="Send OTP"
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    Clicked="OnSendOtpClicked" />
+
+                <!-- Loading Indicator -->
+                <ActivityIndicator x:Name="LoadingIndicator"
+                               IsVisible="False"
+                               IsRunning="False"
+                               Color="#007AFF" />
+
+                <!-- Status Label -->
+                <Label x:Name="StatusLabel"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   IsVisible="False" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

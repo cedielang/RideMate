@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "703660039273",
+    "project_id": "ridemate-7c600",
+    "storage_bucket": "ridemate-7c600.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703660039273:android:cdde18f891fa09dee2d6f8",
+        "android_client_info": {
+          "package_name": "com.companyname.ridemate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc2G7_J2rqGVy_hhrHPLfCEqmE0xZhk4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

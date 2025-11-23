@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.Login"
+             Title="Login"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+
+
+    <Grid>
+        <Image Source="backgroundimage.jpg"
+               Aspect="AspectFill"
+               VerticalOptions="Fill"
+               HorizontalOptions="Fill" />
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Header -->
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+
+                    <Label Text="Welcome!! Ka-RideMate"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="#333333"/>
+                    <Label x:Name="AccountTypeLabel"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    TextColor="#666666"/>
+                </VerticalStackLayout>
+
+
+                <VerticalStackLayout Spacing="15">
+
+                    <!-- Phone Number -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Phone Number"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#333333"/>
+                        <Entry x:Name="PhoneNumberEntry"
+                            Placeholder="Enter your phone number"
+                            BackgroundColor="White"
+                            TextColor="#333333"
+                            Keyboard="Telephone"/>
+                    </VerticalStackLayout>
+
+                    <!-- Password -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Password"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#333333"/>
+                        <Entry x:Name="PasswordEntry"
+                            Placeholder="Enter your password"
+                            BackgroundColor="White"
+                            TextColor="#333333"
+                            IsPassword="True"/>
+                    </VerticalStackLayout>
+
+                    <!-- Remember Me -->
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="RememberMeCheckBox"/>
+                        <Label Text="Remember me"
+                            FontSize="14"
+                            TextColor="#666666"
+                            VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Login Button -->
+                    <Button Text="Login"
+                         BackgroundColor="#007AFF"
+                         TextColor="White"
+                         CornerRadius="10"
+                         FontSize="16"
+                         FontAttributes="Bold"
+                         Clicked="OnLoginClicked"/>
+
+                    <!-- Forgot Password -->
+                    <Button Text="Forgot Password?"
+                         BackgroundColor="Transparent"
+                         TextColor="#007AFF"
+                         FontSize="14"
+                         Clicked="OnForgotPasswordClicked"/>
+                </VerticalStackLayout>
+
+
+                <!-- Signup Section -->
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Don't have an account?"
+                       FontSize="16"
+                       TextColor="#666666"
+                       HorizontalOptions="Center" />
+
+                    <Button Text="Sign Up"
+                        BackgroundColor="Transparent"
+                        TextColor="#007AFF"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        BorderColor="#007AFF"
+                        BorderWidth="2"
+                        CornerRadius="10"
+                        Clicked="OnSignupClicked" />
+                </VerticalStackLayout>
+
+                <!-- Back Button -->
+                <Button Text="← Back"
+                 BackgroundColor="Transparent"
+                 TextColor="#666666"
+                 BorderColor="#E9ECEF"
+                 BorderWidth="1"
+                 CornerRadius="10"
+                 FontSize="14"
+                 Clicked="OnBackClicked"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>  

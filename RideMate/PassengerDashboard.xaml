@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.PassengerDashboard"
+             Title="Passenger Dashboard"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid RowDefinitions="300,*">
+        
+        <!-- Map Section (Top) -->
+        <Grid Grid.Row="0">
+            <WebView x:Name="MapWebView" 
+                     HeightRequest="300"
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill"/>
+            
+            <!-- Map Overlay -->
+            <VerticalStackLayout VerticalOptions="End" 
+                                Padding="10"
+                                Spacing="5">
+                
+                <!-- Search Panel -->
+                <Border x:Name="SearchPanel"
+                        Background="White"
+                        Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="10">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Where to?"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#333"/>
+                        
+                        <Entry x:Name="DestinationEntry"
+                               Placeholder="Enter destination"
+                               FontSize="12"
+                               BackgroundColor="#F5F5F5"/>
+                        
+                        <Button Text="Find Drivers"
+                                BackgroundColor="#2196F3"
+                                TextColor="White"
+                                FontSize="12"
+                                CornerRadius="5"
+                                Clicked="OnBookRideClicked"/>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <!-- Ride Status Panel (Hidden by default) -->
+                <Border x:Name="RideStatusPanel"
+                        Background="White"
+                        Stroke="#4CAF50"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="10"
+                        IsVisible="False">
+                    <VerticalStackLayout Spacing="5">
+                        <Label x:Name="RideStatusLabel"
+                               Text="Ride Status"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               TextColor="#4CAF50"/>
+                        <Label x:Name="FareLabel"
+                               Text="Fare: ₱0.00"
+                               FontSize="11"
+                               TextColor="#333"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+        
+        <!-- Dashboard Content (Bottom) -->
+        <ScrollView Grid.Row="1">
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Header -->
+            <VerticalStackLayout Spacing="10">
+                <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
+                    <Image Source="passengerlogo.png"
+                           WidthRequest="50"
+                           HeightRequest="50"
+                           Aspect="AspectFit"/>
+                    
+                    <VerticalStackLayout>
+                        <Label Text="Welcome, Passenger!"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#333" />
+                        
+                        <Label Text="Where would you like to go?"
+                               FontSize="16"
+                               TextColor="#666" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Quick Actions -->
+            <Border Stroke="#E9ECEF"
+                    Background="#F8F9FA"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Quick Actions"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+                    
+                    <Button Text="🚗 Book a Ride"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            CornerRadius="10"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="OnBookRideClicked" />
+                    
+                    <Button Text="📍 Set Pickup Location"
+                            BackgroundColor="#28A745"
+                            TextColor="White"
+                            CornerRadius="10"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="OnSetLocationClicked" />
+                    
+                    <Button Text="📋 My Trips"
+                            BackgroundColor="#6C757D"
+                            TextColor="White"
+                            CornerRadius="10"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="OnMyTripsClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Recent Activity -->
+            <Border Stroke="#E9ECEF"
+                    Background="White"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Recent Activity"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+                    
+                    <Label Text="No recent trips"
+                           FontSize="14"
+                           TextColor="#666"
+                           HorizontalOptions="Center"
+                           Margin="0,20" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Profile Section -->
+            <Border Stroke="#E9ECEF"
+                    Background="White"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Account"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333" />
+                    
+                    <Button Text="👤 Edit Profile"
+                            BackgroundColor="Transparent"
+                            TextColor="#007AFF"
+                            BorderColor="#007AFF"
+                            BorderWidth="1"
+                            CornerRadius="10"
+                            FontSize="16"
+                            Clicked="OnEditProfileClicked" />
+                    
+                    <Button Text="🚪 Logout"
+                            BackgroundColor="Transparent"
+                            TextColor="#DC3545"
+                            BorderColor="#DC3545"
+                            BorderWidth="1"
+                            CornerRadius="10"
+                            FontSize="16"
+                            Clicked="OnLogoutClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
