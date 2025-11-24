@@ -13,7 +13,7 @@ namespace RideMate.Services
         public FirebaseService()
         {
             // Connect to your Firebase project using the configuration
-            firestore = new CloudFirestoreService(FirebaseConfig.ProjectId);
+            firestore = new CloudFirestoreService();
             
             System.Diagnostics.Debug.WriteLine($"✓ FirebaseService initialized");
             System.Diagnostics.Debug.WriteLine($"  Project ID: {FirebaseConfig.ProjectId}");

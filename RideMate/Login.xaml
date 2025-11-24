@@ -60,10 +60,12 @@
 
                     <!-- Remember Me -->
                     <HorizontalStackLayout Spacing="10">
-                        <CheckBox x:Name="RememberMeCheckBox"/>
+                        <CheckBox
+                            Color="Black"
+                            x:Name="RememberMeCheckBox"/>
                         <Label Text="Remember me"
                             FontSize="14"
-                            TextColor="#666666"
+                            TextColor="Black"
                             VerticalOptions="Center"/>
                     </HorizontalStackLayout>
 

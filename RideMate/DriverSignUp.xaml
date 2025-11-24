@@ -114,7 +114,7 @@
                            FontAttributes="Bold"
                            TextColor="#333333"/>
                         <Entry x:Name="VehicleTypeEntry"
-                           Placeholder="e.g., Sedan, SUV, Motorcycle"
+                           Placeholder="e.g., Sedan, SUV"
                            BackgroundColor="White"
                            TextColor="#333333"/>
                     </VerticalStackLayout>

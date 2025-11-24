@@ -15,15 +15,9 @@ public partial class PassengerDashboard : ContentPage
         currentPassenger = passenger;
     }
 
+    
     // When Book Ride button is clicked
     private async void OnBookRideClicked(object sender, EventArgs e)
-    {
-        // Navigate to map dashboard
-        await Navigation.PushAsync(new PassengerMapDashboard(currentPassenger));
-    }
-
-    // When Set Location button is clicked
-    private async void OnSetLocationClicked(object sender, EventArgs e)
     {
         // Navigate to map dashboard
         await Navigation.PushAsync(new PassengerMapDashboard(currentPassenger));
@@ -48,7 +42,7 @@ public partial class PassengerDashboard : ContentPage
         if (confirm)
         {
             // Clear navigation stack and go to login page
-            Application.Current.MainPage = new NavigationPage(new Login());
+            Application.Current.MainPage = new NavigationPage(new RoleSelectionPage());
         }
     }
 }

@@ -9,8 +9,8 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            // Go directly to main app
-            return new Window(new AppShell());
+            // Show loading page first
+            return new Window(new NavigationPage(new LoadingPage()));
         }
     }
 }

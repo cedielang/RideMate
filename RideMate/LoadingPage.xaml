@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.LoadingPage"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False"
+             Opacity="0">
+
+    <Grid>
+        <!-- Background Gradient (Optional) -->
+        <BoxView>
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FFFFFF" Offset="0.0" />
+                    <GradientStop Color="#F5F5F5" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        
+        <!-- Main Content -->
+        <VerticalStackLayout 
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Spacing="25"
+            Padding="40">
+            
+            <!-- RideMate Logo with Shadow -->
+            <Border BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Padding="20"
+                    HorizontalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="#40000000"
+                            Offset="0,5"
+                            Radius="20"
+                            Opacity="0.3"/>
+                </Border.Shadow>
+                <Image Source="ridematelogo.png"
+                       WidthRequest="180"
+                       HeightRequest="180"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"/>
+            </Border>
+            
+            <!-- App Name -->
+            <Label Text="RideMate"
+                   FontSize="40"
+                   FontAttributes="Bold"
+                   TextColor="#4CAF50"
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,0"/>
+            
+            <!-- Tagline -->
+            <Label Text="Your Ride, Your Way"
+                   FontSize="14"
+                   TextColor="#999"
+                   HorizontalOptions="Center"
+                   Margin="0,-10,0,0"/>
+            
+            <!-- Spacer -->
+            <BoxView HeightRequest="20" Color="Transparent"/>
+            
+            <!-- Loading Message -->
+            <Label Text="Please wait for a moment..."
+                   FontSize="16"
+                   TextColor="#666"
+                   HorizontalOptions="Center"/>
+            
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="True"
+                              Color="#4CAF50"
+                              WidthRequest="40"
+                              HeightRequest="40"
+                              HorizontalOptions="Center"
+                              Margin="0,10,0,0"/>
+            
+        </VerticalStackLayout>
+        
+        <!-- Footer -->
+        <VerticalStackLayout VerticalOptions="End"
+                            HorizontalOptions="Center"
+                            Spacing="5"
+                            Margin="0,0,0,30">
+            <Label Text="Version 1.0"
+                   FontSize="12"
+                   TextColor="#999"
+                   HorizontalOptions="Center"/>
+            <Label Text="© 2024 RideMate. All rights reserved."
+                   FontSize="10"
+                   TextColor="#CCC"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+        
+    </Grid>
+    
+</ContentPage>

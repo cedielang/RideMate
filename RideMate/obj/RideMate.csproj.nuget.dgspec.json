@@ -62,6 +62,10 @@
         "net9.0-android35.0": {
           "targetAlias": "net9.0-android",
           "dependencies": {
+            "BCrypt.Net-Core": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
             "Google.Apis": {
               "target": "Package",
               "version": "[1.72.0, )"
@@ -91,10 +95,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
-            },
-            "Plugin.Firebase": {
-              "target": "Package",
-              "version": "[3.1.1, )"
             },
             "Plugin.Firebase.Auth": {
               "target": "Package",
@@ -133,6 +133,10 @@
         "net9.0-maccatalyst18.5": {
           "targetAlias": "net9.0-maccatalyst",
           "dependencies": {
+            "BCrypt.Net-Core": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
             "Google.Apis": {
               "target": "Package",
               "version": "[1.72.0, )"
@@ -162,10 +166,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
-            },
-            "Plugin.Firebase": {
-              "target": "Package",
-              "version": "[3.1.1, )"
             },
             "Plugin.Firebase.Auth": {
               "target": "Package",
@@ -205,6 +205,10 @@
         "net9.0-windows10.0.19041": {
           "targetAlias": "net9.0-windows10.0.19041.0",
           "dependencies": {
+            "BCrypt.Net-Core": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
             "Google.Apis": {
               "target": "Package",
               "version": "[1.72.0, )"
@@ -228,10 +232,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.4, )"
-            },
-            "Plugin.Firebase": {
-              "target": "Package",
-              "version": "[3.1.1, )"
             },
             "Plugin.Firebase.Auth": {
               "target": "Package",

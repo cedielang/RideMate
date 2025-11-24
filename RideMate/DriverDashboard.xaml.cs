@@ -32,6 +32,8 @@ public partial class DriverDashboard : ContentPage
         LoadMap();
     }
 
+
+
     // Load map from HTML file
     private async void LoadMap()
     {
@@ -242,7 +244,7 @@ public partial class DriverDashboard : ContentPage
         if (confirm)
         {
             // Clear navigation stack and go to login page
-            Application.Current.MainPage = new NavigationPage(new Login());
+            Application.Current.MainPage = new NavigationPage(new RoleSelectionPage());
         }
     }
 }

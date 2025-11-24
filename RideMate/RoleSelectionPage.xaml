@@ -1,101 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                 x:Class="RideMate.RoleSelectionPage"
-                 Title="RoleSelection"
-                 Shell.NavBarIsVisible="False"
-                 BackgroundColor="White">
-    <Grid>
-        <Image Source="backgroundimage.jpg"
-           Aspect="AspectFill"
-           VerticalOptions="Fill"
-           HorizontalOptions="Fill" />
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.RoleSelectionPage"
+             Title="RoleSelection"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="*, Auto" Padding="30">
+
+
         <ScrollView>
-            <VerticalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
-                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
-                    <Image Source="ridematelogo.png"
-               WidthRequest="100"
-               HeightRequest="100"
-               HorizontalOptions="Center"
-               Aspect="AspectFit"/>
-                    <Label Text="Choose Your Role"
-               FontSize="28"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"
-               TextColor="#333333"/>
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Padding="30"
+                                 WidthRequest="300">
+
+                <VerticalStackLayout Spacing="20" HorizontalOptions="Center" Margin="0,0,0, 50">
+                    <Image Source="roleselection.png"
+                           WidthRequest="300"
+                           HeightRequest="300"
+                           HorizontalOptions="Center"
+                           Aspect="AspectFit"/>
+
+                    <Label Text="Are you a Driver or a Passenger?"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="#1B1B1B" 
+                           HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
 
 
-                <VerticalStackLayout Spacing="20">
 
+                <VerticalStackLayout Grid.Row="1" Spacing="10" Margin="0, 92, 0, 0">
 
-                    <VerticalStackLayout Spacing="15">
+                    <Button Text="Continue as Driver"
+                            BackgroundColor="#8D6E63"  TextColor="White"
+                            CornerRadius="8"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            HeightRequest="55"
+                            Clicked="OnDriverClicked"/>
 
-                        <!-- Image and Text Side by Side -->
-                        <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
-                            <Image Source="driverlogo.png"
-                       WidthRequest="60"
-                       HeightRequest="60"
-                       Aspect="AspectFit"/>
-
-                            <VerticalStackLayout Spacing="5">
-                                <Label Text="Driver"
-                           FontSize="24"
-                           FontAttributes="Bold"
-                           TextColor="#333333"/>
-
-                            </VerticalStackLayout>
-                        </HorizontalStackLayout>
-
-
-
-                        <!-- Button at the Bottom -->
-                        <Button Text="Continue as Driver"
-                    BackgroundColor="#28A745"
-                    TextColor="White"
-                    CornerRadius="10"
-                    FontSize="16"
-                    FontAttributes="Bold"
-                    VerticalOptions="End"
-                    Clicked = "OnDriverClicked">
-                        </Button>
-
-
-                    </VerticalStackLayout>
-
-
-
-                    <VerticalStackLayout Spacing="15">
-
-                        <!-- Image and Text Side by Side -->
-                        <HorizontalStackLayout Spacing="15" VerticalOptions="Center">
-                            <Image Source="passengerlogo.png"
-                                  WidthRequest="60"
-                                  HeightRequest="60"
-                                  Aspect="AspectFit"/>
-
-                            <VerticalStackLayout Spacing="5">
-                                <Label Text="Passenger"
-                                      FontSize="24"
-                                      FontAttributes="Bold"
-                                      TextColor="#333333"/>
-                            </VerticalStackLayout>
-                        </HorizontalStackLayout>
-                        <!-- Button at the Bottom -->
-                        <Button Text="Continue as Passenger"
-                                  BackgroundColor="Blue"
-                                  TextColor="White"
-                                  CornerRadius="10"
-                                  FontSize="16"
-                                  FontAttributes="Bold"
-                                  VerticalOptions="End"
-                                  Clicked="OnPassengerClicked"/>
-
-                    </VerticalStackLayout>
+                    <Button Text="Continue as Passenger"
+                            BackgroundColor="#36454F"  TextColor="White"
+                            CornerRadius="8"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            HeightRequest="55"
+                            Clicked="OnPassengerClicked"/>
 
                 </VerticalStackLayout>
 
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
-</ContentPage>  
+</ContentPage>

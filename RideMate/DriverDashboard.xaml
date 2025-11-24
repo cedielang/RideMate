@@ -6,14 +6,12 @@
              BackgroundColor="White"
              Shell.NavBarIsVisible="False">
     
-    <Grid RowDefinitions="300,*">
+    <Grid RowDefinitions="350,*">
         
-        <!-- Map Section (Top) -->
+        <!-- Map Section -->
         <Grid Grid.Row="0">
             <WebView x:Name="MapWebView" 
-                     HeightRequest="300"
-                     VerticalOptions="Fill"
-                     HorizontalOptions="Fill"/>
+                     HeightRequest="350"/>
             
             <!-- Map Overlay Controls -->
             <VerticalStackLayout VerticalOptions="End" 
@@ -32,11 +30,12 @@
                         <Label Text="Set Your Route"
                                FontSize="14"
                                FontAttributes="Bold"
-                               TextColor="#333"/>
+                               TextColor="Black"/>
                         
                         <Entry x:Name="DestinationEntry"
                                Placeholder="Enter destination"
                                FontSize="12"
+                               TextColor="Black"                              
                                BackgroundColor="#F5F5F5"/>
                         
                         <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
@@ -45,7 +44,6 @@
                                     BackgroundColor="#4CAF50"
                                     TextColor="White"
                                     FontSize="12"
-                                    CornerRadius="5"
                                     Clicked="OnSetRouteClicked"/>
                             
                             <Button Text="Cancel"
@@ -53,7 +51,6 @@
                                     BackgroundColor="#757575"
                                     TextColor="White"
                                     FontSize="12"
-                                    CornerRadius="5"
                                     Clicked="OnCancelRouteClicked"/>
                         </Grid>
                     </VerticalStackLayout>
@@ -61,18 +58,17 @@
                 
                 <!-- Start Route Button -->
                 <Button x:Name="StartRouteButton"
-                        Text="🚗 Start Route"
+                        Text="Start Route"
                         BackgroundColor="#2196F3"
                         TextColor="White"
-                        CornerRadius="10"
                         FontSize="14"
                         FontAttributes="Bold"
                         Clicked="OnStartRouteButtonClicked"/>
             </VerticalStackLayout>
         </Grid>
         
-        <!-- Dashboard Content (Bottom) -->
-        <ScrollView Grid.Row="1">
+        <!-- Dashboard Content -->
+        <ScrollView Grid.Row="1" BackgroundColor="#F9F9F9">
             <VerticalStackLayout Spacing="15" Padding="15">
             
             <!-- Status Toggle -->
@@ -136,48 +132,40 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Profile Section -->
-            <Border Stroke="#E9ECEF"
-                    Background="White"
-                    StrokeShape="RoundRectangle 15"
-                    Padding="20">
+            <!-- Menu Buttons -->
+            <VerticalStackLayout Spacing="10" Margin="0,10,0,0">
                 
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="Account"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="#333" />
-                    
-                    <Button Text="🚗 Vehicle Information"
-                            BackgroundColor="Transparent"
-                            TextColor="#007AFF"
-                            BorderColor="#007AFF"
-                            BorderWidth="1"
-                            CornerRadius="10"
-                            FontSize="16"
-                            Clicked="OnVehicleInfoClicked" />
-                    
-                    <Button Text="👤 Edit Profile"
-                            BackgroundColor="Transparent"
-                            TextColor="#007AFF"
-                            BorderColor="#007AFF"
-                            BorderWidth="1"
-                            CornerRadius="10"
-                            FontSize="16"
-                            Clicked="OnEditProfileClicked" />
-                    
-                    <Button Text="🚪 Logout"
-                            BackgroundColor="Transparent"
-                            TextColor="#DC3545"
-                            BorderColor="#DC3545"
-                            BorderWidth="1"
-                            CornerRadius="10"
-                            FontSize="16"
-                            Clicked="OnLogoutClicked" />
-                </VerticalStackLayout>
-            </Border>
+                <Button Text="🚙 Vehicle Information"
+                        BackgroundColor="White"
+                        TextColor="#333"
+                        BorderColor="#E0E0E0"
+                        BorderWidth="1"
+                        FontSize="16"
+                        HeightRequest="50"
+                        Clicked="OnVehicleInfoClicked"/>
+                
+                <Button Text="👤 Edit Profile"
+                        BackgroundColor="White"
+                        TextColor="#333"
+                        BorderColor="#E0E0E0"
+                        BorderWidth="1"
+                        FontSize="16"
+                        HeightRequest="50"
+                        Clicked="OnEditProfileClicked"/>
+                
+                <Button Text="🚪 Logout"
+                        BackgroundColor="White"
+                        TextColor="#DC3545"
+                        BorderColor="#DC3545"
+                        BorderWidth="1"
+                        FontSize="16"
+                        HeightRequest="50"
+                        Clicked="OnLogoutClicked"/>
+                
+            </VerticalStackLayout>
 
             </VerticalStackLayout>
         </ScrollView>
+        
     </Grid>
 </ContentPage>

@@ -1,4 +1,5 @@
 using RideMate.Models;
+using RideMate.Services;
 
 namespace RideMate;
 
@@ -9,8 +10,10 @@ public partial class RatingPage : ContentPage
     private double _fare;
     private string _paymentMethod;
     private int _selectedRating = 0;
+    private string _rideId;
+    private CloudFirestoreService _firestoreService;
 
-    public RatingPage(Passenger passenger, Driver driver, double fare, string paymentMethod)
+    public RatingPage(Passenger passenger, Driver driver, double fare, string paymentMethod, string rideId = null)
     {
         InitializeComponent();
         
@@ -18,6 +21,8 @@ public partial class RatingPage : ContentPage
         _driver = driver;
         _fare = fare;
         _paymentMethod = paymentMethod;
+        _rideId = rideId;
+        _firestoreService = new CloudFirestoreService();
         
         DriverNameLabel.Text = _driver.Name;
         FareLabel.Text = $"₱{_fare:F2}";
@@ -154,8 +159,18 @@ public partial class RatingPage : ContentPage
             if (PunctualButton.BackgroundColor == Color.FromArgb("#E3F2FD"))
                 feedbackTags.Add("Punctual");
             
-            // In real app, save rating to database
-            await Task.Delay(1000);
+            // Save rating to Firestore
+            if (!string.IsNullOrEmpty(_rideId))
+            {
+                await _firestoreService.SaveRating(
+                    _rideId, 
+                    _passenger.Phone, 
+                    _driver.Phone, 
+                    _selectedRating, 
+                    feedbackTags, 
+                    comment
+                );
+            }
             
             // Show success message
             await DisplayAlert("✓ Thank You!", 

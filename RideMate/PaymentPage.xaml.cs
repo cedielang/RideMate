@@ -1,4 +1,5 @@
 using RideMate.Models;
+using RideMate.Services;
 
 namespace RideMate;
 
@@ -8,14 +9,18 @@ public partial class PaymentPage : ContentPage
     private Driver _driver;
     private double _fare;
     private string _selectedPaymentMethod = "";
+    private string _rideId;
+    private CloudFirestoreService _firestoreService;
 
-    public PaymentPage(Passenger passenger, Driver driver, double fare)
+    public PaymentPage(Passenger passenger, Driver driver, double fare, string rideId = null)
     {
         InitializeComponent();
         
         _passenger = passenger;
         _driver = driver;
         _fare = fare;
+        _rideId = rideId;
+        _firestoreService = new CloudFirestoreService();
         
         FareLabel.Text = $"₱{_fare:F2}";
     }
@@ -129,12 +134,18 @@ public partial class PaymentPage : ContentPage
         
         if (paymentSuccess)
         {
+            // Save payment to Firestore
+            if (!string.IsNullOrEmpty(_rideId))
+            {
+                await _firestoreService.SavePayment(_rideId, _passenger.Phone, _driver.Phone, _fare, "GCash");
+            }
+            
             await DisplayAlert("✓ Payment Successful", 
                 $"Your payment of ₱{_fare:F2} via GCash has been processed successfully!", 
                 "OK");
             
             // Go to rating page
-            await Navigation.PushAsync(new RatingPage(_passenger, _driver, _fare, "GCash"));
+            await Navigation.PushAsync(new RatingPage(_passenger, _driver, _fare, "GCash", _rideId));
         }
         else
         {
@@ -164,12 +175,18 @@ public partial class PaymentPage : ContentPage
         
         if (paymentSuccess)
         {
+            // Save payment to Firestore
+            if (!string.IsNullOrEmpty(_rideId))
+            {
+                await _firestoreService.SavePayment(_rideId, _passenger.Phone, _driver.Phone, _fare, "Maya");
+            }
+            
             await DisplayAlert("✓ Payment Successful", 
                 $"Your payment of ₱{_fare:F2} via Maya has been processed successfully!", 
                 "OK");
             
             // Go to rating page
-            await Navigation.PushAsync(new RatingPage(_passenger, _driver, _fare, "Maya"));
+            await Navigation.PushAsync(new RatingPage(_passenger, _driver, _fare, "Maya", _rideId));
         }
         else
         {
@@ -188,12 +205,18 @@ public partial class PaymentPage : ContentPage
         
         if (confirm)
         {
+            // Save payment to Firestore
+            if (!string.IsNullOrEmpty(_rideId))
+            {
+                await _firestoreService.SavePayment(_rideId, _passenger.Phone, _driver.Phone, _fare, "Cash");
+            }
+            
             await DisplayAlert("✓ Payment Confirmed", 
                 "Thank you! Your cash payment has been recorded.", 
                 "OK");
             
             // Go to rating page
-            await Navigation.PushAsync(new RatingPage(_passenger, _driver, _fare, "Cash"));
+            await Navigation.PushAsync(new RatingPage(_passenger, _driver, _fare, "Cash", _rideId));
         }
         else
         {

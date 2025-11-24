@@ -9,6 +9,7 @@ namespace RideMate.Services
         private readonly HttpClient httpClient;
         private readonly string apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6Ijc5MDUxZmRlYWQyMTQ1Nzc4ZWVlZGJlMGU3NDA2MGFjIiwiaCI6Im11cm11cjY0In0=";
 
+
         public MapService()
         {
             httpClient = new HttpClient();

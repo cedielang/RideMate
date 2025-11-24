@@ -10,8 +10,10 @@ public partial class ActiveRidePage : ContentPage
     private string _destination;
     private double _fare;
     private bool _rideCompleted = false;
+    private string _rideId;
+    private CloudFirestoreService _firestoreService;
 
-    public ActiveRidePage(Passenger passenger, Driver driver, string destination, double fare)
+    public ActiveRidePage(Passenger passenger, Driver driver, string destination, double fare, string rideId = null)
     {
         InitializeComponent();
         
@@ -19,6 +21,8 @@ public partial class ActiveRidePage : ContentPage
         _driver = driver;
         _destination = destination;
         _fare = fare;
+        _rideId = rideId;
+        _firestoreService = new CloudFirestoreService();
         
         LoadRideInfo();
         LoadMap();
@@ -164,8 +168,15 @@ public partial class ActiveRidePage : ContentPage
             return;
         }
         
+        // Update ride status to completed in Firestore
+        if (!string.IsNullOrEmpty(_rideId))
+        {
+            await _firestoreService.UpdateRideStatus(_rideId, "Completed");
+            await _firestoreService.UpdateRideFare(_rideId, _fare);
+        }
+        
         // Navigate to payment page
-        await Navigation.PushAsync(new PaymentPage(_passenger, _driver, _fare));
+        await Navigation.PushAsync(new PaymentPage(_passenger, _driver, _fare, _rideId));
     }
 
     // Cancel ride

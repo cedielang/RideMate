@@ -4,6 +4,16 @@
         <name>RideMate</name>
     </assembly>
     <members>
+        <member name="M:RideMate.Services.FareCalculatorService.CalculateFare(System.Double,System.Double,System.Double)">
+            <summary>
+            Calculates total fare based on distance, time, and an optional surge multiplier.
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.FareCalculatorService.CalculateFareWithBreakdown(System.Double,System.Double,System.Double)">
+            <summary>
+            Calculates total fare and provides a full breakdown, including surge.
+            </summary>
+        </member>
         <member name="T:RideMate.Resource">
             <summary>
             Android Resource Designer class.

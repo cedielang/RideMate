@@ -10,9 +10,10 @@
        Aspect="AspectFill"
        VerticalOptions="Fill"
        HorizontalOptions="Fill" />
-        <VerticalStackLayout>
+        
+        <VerticalStackLayout Spacing="20" Padding="20">
 
-            <!-- Header -->
+                <!-- Header -->
             <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Label Text="Create New Account"
                        FontSize="28"

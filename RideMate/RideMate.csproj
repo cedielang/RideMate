@@ -46,7 +46,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FFFFFF" />
 
 		<!-- Splash Screen - RideMate Logo on White Background -->
 		<MauiSplashScreen Include="Resources\Images\ridematelogo.png" Color="#FFFFFF" BaseSize="400,400" />
@@ -62,12 +62,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Platforms\Android\google-services.json" />
-	  <None Remove="Services\ridemate-7c600-firebase-adminsdk-fbsvc-6384e1273d.json" />
+	  <None Remove="Platforms\Android\google-services.json" />	  
+	  <None Remove="Services\ridemate-7c600-firebase-adminsdk-fbsvc-5436270108.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Services\ridemate-7c600-firebase-adminsdk-fbsvc-6384e1273d.json" />
+	  <EmbeddedResource Include="Services\ridemate-7c600-firebase-adminsdk-fbsvc-5436270108.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,6 +75,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
 		<PackageReference Include="Google.Apis" Version="1.72.0" />
 		<PackageReference Include="Google.Apis.Auth" Version="1.72.0" />
 		<PackageReference Include="Google.Cloud.Firestore" Version="3.12.0" />

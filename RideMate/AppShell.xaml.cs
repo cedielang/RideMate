@@ -7,6 +7,7 @@
             InitializeComponent();
             
             // Register routes for navigation
+            Routing.RegisterRoute("loading", typeof(LoadingPage));
             Routing.RegisterRoute("sendotp", typeof(SendOtpPage));
             Routing.RegisterRoute("otpverification", typeof(OtpVerification));
             Routing.RegisterRoute("roleselection", typeof(RoleSelectionPage));

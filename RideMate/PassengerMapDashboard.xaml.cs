@@ -218,19 +218,35 @@ public partial class PassengerMapDashboard : ContentPage
         
         try
         {
+            // Parse current location
+            var coords = _currentLocation.Split(',');
+            double passengerLat = double.Parse(coords[0].Trim());
+            double passengerLng = double.Parse(coords[1].Trim());
+            
+            // Destination coordinates (example)
+            double destLat = 14.6760;
+            double destLng = 121.0437;
+            
             // Create ride request
             var request = new RideRequest
             {
-                Id = Guid.NewGuid().ToString(),
                 PassengerId = _passenger.Phone,
                 PassengerName = _passenger.Name,
                 PassengerPhone = _passenger.Phone,
                 DriverId = ride.DriverId,
                 DriverName = ride.DriverName,
+                PickupLatitude = passengerLat,
+                PickupLongitude = passengerLng,
+                DestinationLatitude = destLat,
+                DestinationLongitude = destLng,
                 DestinationAddress = _destination,
                 Status = "Requested",
                 RequestTime = DateTime.Now
             };
+            
+            // Save to Firestore
+            var firestoreService = new CloudFirestoreService();
+            string rideId = await firestoreService.CreateRideRequest(request);
             
             // Show waiting message
             await DisplayAlert("Request Sent!", 
@@ -242,6 +258,12 @@ public partial class PassengerMapDashboard : ContentPage
             
             // Simulate driver accepting (in real app, this would be real-time notification)
             await Task.Delay(3000);
+            
+            // Update ride status to accepted
+            if (!string.IsNullOrEmpty(rideId))
+            {
+                await firestoreService.AssignDriverToRide(rideId, ride.DriverId, ride.DriverName);
+            }
             
             bool accepted = await DisplayAlert("Driver Accepted!", 
                 $"{ride.DriverName} has accepted your ride request!\n\nYour driver is on the way.", 
@@ -262,7 +284,7 @@ public partial class PassengerMapDashboard : ContentPage
                 double fare = 150.00;
                 
                 // Navigate to active ride page
-                await Navigation.PushAsync(new ActiveRidePage(_passenger, driver, _destination, fare));
+                await Navigation.PushAsync(new ActiveRidePage(_passenger, driver, _destination, fare, rideId));
             }
         }
         catch (Exception ex)

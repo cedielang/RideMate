@@ -3,6 +3,7 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "RideMate.dll" comes first in this list. */
 		"RideMate.dll",
+		"BCrypt.Net-Core.dll",
 		"Google.Api.CommonProtos.dll",
 		"Google.Api.Gax.dll",
 		"Google.Api.Gax.Grpc.dll",
