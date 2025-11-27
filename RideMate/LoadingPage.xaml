@@ -46,12 +46,12 @@
             <Label Text="RideMate"
                    FontSize="40"
                    FontAttributes="Bold"
-                   TextColor="#4CAF50"
+                   TextColor="Black"
                    HorizontalOptions="Center"
                    Margin="0,10,0,0"/>
             
             <!-- Tagline -->
-            <Label Text="Your Ride, Your Way"
+            <Label Text="Your Safety is our Priority"
                    FontSize="14"
                    TextColor="#999"
                    HorizontalOptions="Center"

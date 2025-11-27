@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RideMate.EditProfileDriver"
+             Shell.NavBarIsVisible="False"
+             Title="Edit Driver Profile">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30">
+
+            <Label Text="Update Your Profile &amp; Vehicle Details" FontSize="24" FontAttributes="Bold" TextColor="#2196F3" HorizontalOptions="Center" Margin="0,10,0,10" />
+
+            <!-- Personal Fields -->
+            <Frame CornerRadius="10" Padding="15" BorderColor="#ddd" HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Personal Details" FontSize="18" FontAttributes="Bold" TextColor="#333" />
+
+                    <Label Text="Full Name:" FontSize="14" FontAttributes="Bold" />
+                    <Entry x:Name="NameEntry" 
+                           Placeholder="Full Name" 
+                           Text="{Binding Name}"
+                           Keyboard="Text" />
+
+                    <Label Text="Email:" FontSize="14" FontAttributes="Bold" />
+                    <Entry x:Name="EmailEntry" 
+                           Placeholder="Email Address" 
+                           Text="{Binding Email}"
+                           Keyboard="Email" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Vehicle Fields -->
+            <Frame CornerRadius="10" Padding="15" BorderColor="#ddd" HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Vehicle Information" FontSize="18" FontAttributes="Bold" TextColor="#333" />
+
+                    <Label Text="Vehicle Type (e.g., Sedan, SUV):" FontSize="14" FontAttributes="Bold" />
+                    <Entry x:Name="VehicleTypeEntry" 
+                           Placeholder="Vehicle Type" 
+                           Text="{Binding VehicleType}"
+                           Keyboard="Text" />
+
+                    <Label Text="Vehicle Model (e.g., Toyota Vios):" FontSize="14" FontAttributes="Bold" />
+                    <Entry x:Name="VehicleModelEntry" 
+                           Placeholder="Vehicle Model" 
+                           Text="{Binding VehicleModel}"
+                           Keyboard="Text" />
+
+                    <Label Text="Plate Number:" FontSize="14" FontAttributes="Bold" />
+                    <Entry x:Name="PlateNumberEntry" 
+                           Placeholder="Plate Number" 
+                           Text="{Binding PlateNumber}"
+                           Keyboard="Text" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Save Button -->
+            <Button Text="Save Changes" 
+                    x:Name="SaveButton"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#4CAF50" 
+                    TextColor="White" 
+                    CornerRadius="10" 
+                    Margin="0,20,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

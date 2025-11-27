@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="is_pooling_container_tag" type="id"/>
-    <item name="pooling_container_listener_holder_tag" type="id"/>
+    <declare-styleable name="ViewPager2">
+        <attr name="android:orientation"/>
+    </declare-styleable>
 </resources>

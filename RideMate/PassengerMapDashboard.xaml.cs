@@ -1,6 +1,10 @@
 using Microsoft.Maui.Controls.Shapes;
 using RideMate.Models;
 using RideMate.Services;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic; // Added for List<RideRequest>
 
 namespace RideMate;
 
@@ -18,7 +22,7 @@ public partial class PassengerMapDashboard : ContentPage
         _passenger = passenger;
         _locationService = new LocationService();
         _rideService = new RideService();
-        
+
         LoadMap();
         GetCurrentLocation();
     }
@@ -34,7 +38,7 @@ public partial class PassengerMapDashboard : ContentPage
                 Url = $"file:///android_asset/map.html"
             };
             MapWebView.Source = htmlSource;
-            
+
             // Wait for map to load
             await Task.Delay(1000);
         }
@@ -50,11 +54,11 @@ public partial class PassengerMapDashboard : ContentPage
         try
         {
             bool hasPermission = await _locationService.CheckAndRequestLocationPermission();
-            
+
             if (hasPermission)
             {
                 var location = await _locationService.GetCurrentLocation();
-                
+
                 if (location != null)
                 {
                     _currentLocation = $"{location.Latitude:F4}, {location.Longitude:F4}";
@@ -81,28 +85,28 @@ public partial class PassengerMapDashboard : ContentPage
     {
         // Get destination
         _destination = DestinationEntry.Text;
-        
+
         // Validate
         if (string.IsNullOrWhiteSpace(_destination))
         {
             await DisplayAlert("Error", "Please enter your destination", "OK");
             return;
         }
-        
-        // Find drivers going to same destination
-        var availableRides = _rideService.GetRidesByDestination(_destination);
-        
+
+        // FIX: Call the asynchronous method and await the result
+        List<RideRequest> availableRides = await _rideService.GetRidesByDestinationAsync(_destination);
+
         if (availableRides == null || !availableRides.Any())
         {
-            await DisplayAlert("No Rides Found", 
-                $"No drivers are currently going to '{_destination}'.\n\nPlease try again later or search for a different destination.", 
+            await DisplayAlert("No Rides Found",
+                $"No drivers are currently going to '{_destination}'.\n\nPlease try again later or search for a different destination.",
                 "OK");
             return;
         }
-        
+
         // Show available drivers
         ShowAvailableDrivers(availableRides);
-        
+
         // Update map
         UpdateMapWithDestination();
     }
@@ -112,7 +116,7 @@ public partial class PassengerMapDashboard : ContentPage
     {
         // Clear previous list
         DriversListContainer.Children.Clear();
-        
+
         // Add header
         DriversListContainer.Children.Add(new Label
         {
@@ -122,7 +126,7 @@ public partial class PassengerMapDashboard : ContentPage
             TextColor = Color.FromArgb("#4CAF50"),
             Margin = new Thickness(0, 0, 0, 10)
         });
-        
+
         // Add each driver
         foreach (var ride in rides)
         {
@@ -137,9 +141,9 @@ public partial class PassengerMapDashboard : ContentPage
                 Padding = 15,
                 Margin = new Thickness(0, 5)
             };
-            
+
             var cardContent = new VerticalStackLayout { Spacing = 8 };
-            
+
             // Driver name
             cardContent.Children.Add(new Label
             {
@@ -148,7 +152,7 @@ public partial class PassengerMapDashboard : ContentPage
                 FontAttributes = FontAttributes.Bold,
                 TextColor = Colors.Black
             });
-            
+
             // Destination
             cardContent.Children.Add(new Label
             {
@@ -156,7 +160,7 @@ public partial class PassengerMapDashboard : ContentPage
                 FontSize = 14,
                 TextColor = Color.FromArgb("#666")
             });
-            
+
             // Request button
             var requestButton = new Button
             {
@@ -166,10 +170,10 @@ public partial class PassengerMapDashboard : ContentPage
                 CornerRadius = 8,
                 Margin = new Thickness(0, 5, 0, 0)
             };
-            
+
             // Handle button click
             requestButton.Clicked += async (s, args) => await OnRequestRideClicked(ride);
-            
+
             cardContent.Children.Add(requestButton);
             driverCard.Content = cardContent;
             DriversListContainer.Children.Add(driverCard);
@@ -182,22 +186,22 @@ public partial class PassengerMapDashboard : ContentPage
         try
         {
             // Parse current location
-            var coords = _currentLocation.Split(',');
+            var coords = _currentLocation!.Split(',');
             double passengerLat = double.Parse(coords[0].Trim());
             double passengerLng = double.Parse(coords[1].Trim());
-            
+
             // Add passenger marker
             await MapWebView.EvaluateJavaScriptAsync(
                 $"addMarker('passenger', {passengerLat}, {passengerLng}, 'You', 'passenger')");
-            
+
             // For demo, use destination coordinate
             double destLat = 14.6760;
             double destLng = 121.0437;
-            
+
             // Add destination marker
             await MapWebView.EvaluateJavaScriptAsync(
                 $"addMarker('destination', {destLat}, {destLng}, '{_destination}', 'destination')");
-            
+
             // Center map to show both
             await MapWebView.EvaluateJavaScriptAsync("fitBounds()");
         }
@@ -210,27 +214,28 @@ public partial class PassengerMapDashboard : ContentPage
     // When passenger requests a ride
     private async Task OnRequestRideClicked(RideRequest ride)
     {
-        bool confirm = await DisplayAlert("Confirm Ride Request", 
-            $"Request ride from {ride.DriverName}?\n\nDestination: {ride.DestinationAddress}", 
+        bool confirm = await DisplayAlert("Confirm Ride Request",
+            $"Request ride from {ride.DriverName}?\n\nDestination: {ride.DestinationAddress}",
             "Yes", "No");
-        
+
         if (!confirm) return;
-        
+
         try
         {
             // Parse current location
-            var coords = _currentLocation.Split(',');
+            var coords = _currentLocation!.Split(',');
             double passengerLat = double.Parse(coords[0].Trim());
             double passengerLng = double.Parse(coords[1].Trim());
-            
+
             // Destination coordinates (example)
             double destLat = 14.6760;
             double destLng = 121.0437;
-            
+
             // Create ride request
             var request = new RideRequest
             {
-                PassengerId = _passenger.Phone,
+                // FIX: Use secure UID from passenger model instead of phone number
+                PassengerId = _passenger.Id,
                 PassengerName = _passenger.Name,
                 PassengerPhone = _passenger.Phone,
                 DriverId = ride.DriverId,
@@ -241,50 +246,44 @@ public partial class PassengerMapDashboard : ContentPage
                 DestinationLongitude = destLng,
                 DestinationAddress = _destination,
                 Status = "Requested",
-                RequestTime = DateTime.Now
             };
-            
-            // Save to Firestore
-            var firestoreService = new CloudFirestoreService();
-            string rideId = await firestoreService.CreateRideRequest(request);
-            
+
+            // Save to Firestore using the core service wrapper
+            // FIX: Use RideService method, which internally calls CloudFirestoreService
+            string? rideId = await _rideService.CreateDriverRideOffer(request);
+
             // Show waiting message
-            await DisplayAlert("Request Sent!", 
-                $"Your ride request has been sent to {ride.DriverName}.\n\nWaiting for driver to accept...", 
+            await DisplayAlert("Request Sent!",
+                $"Your ride request has been sent to {ride.DriverName}.\n\nWaiting for driver to accept...",
                 "OK");
-            
+
             // Update map to show connection
             UpdateMapWithRideRequest(ride);
-            
-            // Simulate driver accepting (in real app, this would be real-time notification)
-            await Task.Delay(3000);
-            
-            // Update ride status to accepted
+
+            // --- NOTE: In a real app, monitoring starts here ---
+            // Simulating acceptance is removed for real-time compliance.
+
+            // Dummy accepted logic replaced by real-time monitoring system check (not in this file)
+            // bool accepted = await DisplayAlert(...);
+
+            // Assuming acceptance occurs later via real-time update in a dedicated Monitor
+
             if (!string.IsNullOrEmpty(rideId))
             {
-                await firestoreService.AssignDriverToRide(rideId, ride.DriverId, ride.DriverName);
-            }
-            
-            bool accepted = await DisplayAlert("Driver Accepted!", 
-                $"{ride.DriverName} has accepted your ride request!\n\nYour driver is on the way.", 
-                "View Ride", "Cancel");
-            
-            if (accepted)
-            {
-                // Create driver object from ride info
-                var driver = new Driver
+                // Navigate immediately to a waiting/active ride page that starts MONITORING the rideId.
+                var driverPlaceholder = new Driver // Placeholder driver object for navigation
                 {
                     Name = ride.DriverName,
-                    Phone = ride.DriverId,
+                    Phone = ride.DriverPhone,
+                    Id = ride.DriverId,
                     VehicleModel = "Toyota Vios",
                     PlateNumber = "ABC 1234"
                 };
-                
-                // Calculate fare (example)
-                double fare = 150.00;
-                
+
                 // Navigate to active ride page
-                await Navigation.PushAsync(new ActiveRidePage(_passenger, driver, _destination, fare, rideId));
+                // The ActiveRidePage must monitor the rideId for status changes.
+                double fare = 150.00; // Fare calculation should move to the server/ActiveRidePage
+                await Navigation.PushAsync(new ActiveRidePage(_passenger, driverPlaceholder, _destination, fare, rideId));
             }
         }
         catch (Exception ex)
@@ -301,30 +300,30 @@ public partial class PassengerMapDashboard : ContentPage
             // Clear existing markers
             await MapWebView.EvaluateJavaScriptAsync("clearMarkers()");
             await MapWebView.EvaluateJavaScriptAsync("clearRoute()");
-            
+
             // Parse current location
-            var coords = _currentLocation.Split(',');
+            var coords = _currentLocation!.Split(',');
             double passengerLat = double.Parse(coords[0].Trim());
             double passengerLng = double.Parse(coords[1].Trim());
-            
+
             // Add driver marker
             await MapWebView.EvaluateJavaScriptAsync(
                 $"addMarker('driver', {ride.PickupLatitude}, {ride.PickupLongitude}, 'Driver: {ride.DriverName}', 'driver')");
-            
+
             // Add passenger marker
             await MapWebView.EvaluateJavaScriptAsync(
                 $"addMarker('passenger', {passengerLat}, {passengerLng}, 'You', 'passenger')");
-            
+
             // Add destination marker
             double destLat = 14.6760;
             double destLng = 121.0437;
             await MapWebView.EvaluateJavaScriptAsync(
                 $"addMarker('destination', {destLat}, {destLng}, '{_destination}', 'destination')");
-            
+
             // Draw route from driver to passenger
             await MapWebView.EvaluateJavaScriptAsync(
                 $"setRoute({ride.PickupLatitude}, {ride.PickupLongitude}, {passengerLat}, {passengerLng})");
-            
+
             // Fit map to show all points
             await MapWebView.EvaluateJavaScriptAsync("fitBounds()");
         }

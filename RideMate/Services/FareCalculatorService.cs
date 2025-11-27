@@ -1,19 +1,24 @@
 using System;
+using System.Collections.Generic;
+using System.Linq; // Required for tax calculations later
 
 namespace RideMate.Services
 {
     // Fare Calculator Service - Calculates ride fare in Philippine Peso
     public class FareCalculatorService
     {
-        // Philippine taxi/ride-sharing rates (based on typical rates)
-        private const double BASE_FARE = 40.00;           // Starting fare (₱40)
-        private const double RATE_PER_KM = 13.50;         // Per kilometer (₱13.50/km)
-        private const double RATE_PER_MINUTE = 2.00;      // Per minute waiting/slow traffic (₱2/min)
+        // Philippine taxi/ride-sharing rates (Based on lower, more competitive estimates)
+        private const double BASE_FARE = 35.00;           // Starting fare (₱35 - slightly reduced)
+        private const double RATE_PER_KM = 12.00;         // Per kilometer (₱12.00/km - reduced)
+        private const double RATE_PER_MINUTE = 1.80;      // Per minute waiting/slow traffic (₱1.80/min - reduced)
         private const double MINIMUM_FARE = 40.00;        // Minimum fare (₱40)
-        private const double BOOKING_FEE = 0.00;          // Optional booking fee (₱0)
+        private const double BOOKING_FEE = 5.00;          // Small booking fee added (₱5)
+
+        // BUSINESS LOGIC CONSTANTS
+        private const double VAT_RATE = 0.12; // 12% VAT (Value Added Tax) in the Philippines
+        private const double COMPANY_COMMISSION_RATE = 0.30; // 30% Company Commission
 
         // ⚠️ DEPRECATED: Standard fare models require distance AND time from the map API.
-        // I recommend removing this method in a production app.
         public double CalculateFareByDistance(double distanceInKm)
         {
             // Base fare + (distance × rate per km)
@@ -29,7 +34,7 @@ namespace RideMate.Services
         }
 
         // =======================================================
-        // CORE CALCULATION METHODS (ENHANCED FOR SURGE)
+        // CORE CALCULATION METHODS
         // =======================================================
 
         /// <summary>
@@ -77,7 +82,7 @@ namespace RideMate.Services
 
             // 4. Calculate surge amount for breakdown display
             double surgeAmount = total - baseTotal;
-            if (surgeAmount < 0) surgeAmount = 0; // Ensures surge amount is not negative if minimum fare applies
+            if (surgeAmount < 0) surgeAmount = 0;
 
             return new FareBreakdown
             {
@@ -86,11 +91,10 @@ namespace RideMate.Services
                 TimeFare = Math.Round(timeFare, 2),
                 BookingFee = Math.Round(BOOKING_FEE, 2),
 
-                // New Surge Properties
                 SurgeMultiplier = Math.Round(surgeMultiplier, 2),
                 SurgeAmount = Math.Round(surgeAmount, 2),
 
-                Subtotal = Math.Round(baseTotal, 2), // Subtotal before final adjustments (like minimum/surge)
+                Subtotal = Math.Round(baseTotal, 2),
                 Total = Math.Round(total, 2),
 
                 DistanceInKm = Math.Round(distanceInKm, 2),
@@ -99,14 +103,45 @@ namespace RideMate.Services
         }
 
         // =======================================================
-        // UTILITIES (UNCHANGED/REFINED)
+        // ADMIN PANEL/BACKEND LOGIC (Tax and Payout)
         // =======================================================
 
+        /// <summary>
+        /// Calculates the driver's net payout and the company's commission, 
+        /// including mandatory VAT on the commission.
+        /// </summary>
+        /// <param name="totalFareReceived">The total amount the passenger paid.</param>
+        public PayoutDetails CalculateDriverPayoutAndTax(double totalFareReceived)
+        {
+            // 1. Calculate the Company's Commission (30%)
+            double companyCommission = totalFareReceived * COMPANY_COMMISSION_RATE;
+
+            // 2. Calculate VAT (12%) on the commission amount
+            // VAT applies only to the service fee (commission) charged by the company.
+            double vatAmount = companyCommission * VAT_RATE;
+
+            // 3. Net Commission for Company (After VAT calculation)
+            double netCommission = companyCommission + vatAmount;
+
+            // 4. Driver's Payout (What the driver keeps)
+            double driverPayout = totalFareReceived - netCommission;
+
+            return new PayoutDetails
+            {
+                TotalFare = Math.Round(totalFareReceived, 2),
+                DriverPayout = Math.Round(driverPayout, 2),
+                CompanyCommission = Math.Round(companyCommission, 2),
+                VatOnCommission = Math.Round(vatAmount, 2),
+                NetCompanyRevenue = Math.Round(netCommission, 2)
+            };
+        }
+
+      
+
         // Calculate distance between two coordinates (Haversine formula)
-        // Note: Use distance from Map API for better accuracy in final fare!
         public double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
         {
-            const double R = 6371.0; // Earth's radius in kilometers
+            const double R = 6371.0;
 
             double lat1Rad = DegreesToRadians(lat1);
             double lon1Rad = DegreesToRadians(lon1);
@@ -122,7 +157,7 @@ namespace RideMate.Services
 
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
-            double distance = R * c; // Distance in kilometers
+            double distance = R * c;
 
             return Math.Round(distance, 2);
         }
@@ -130,7 +165,7 @@ namespace RideMate.Services
         // Estimate time based on distance (average speed 30 km/h in city)
         public double EstimateTime(double distanceInKm)
         {
-            const double AVERAGE_SPEED_KMH = 30.0; // Average city speed
+            const double AVERAGE_SPEED_KMH = 30.0;
             double timeInHours = distanceInKm / AVERAGE_SPEED_KMH;
             double timeInMinutes = timeInHours * 60;
 
@@ -154,7 +189,7 @@ namespace RideMate.Services
         }
     }
 
-    // Fare breakdown model (MODIFIED FOR SURGE)
+    // Fare breakdown model
     public class FareBreakdown
     {
         public double BaseFare { get; set; }
@@ -164,7 +199,7 @@ namespace RideMate.Services
 
         // New Surge Properties
         public double SurgeMultiplier { get; set; }
-        public double SurgeAmount { get; set; } // The monetary increase due to surge
+        public double SurgeAmount { get; set; }
 
         public double Subtotal { get; set; }
         public double Total { get; set; }
@@ -185,5 +220,15 @@ namespace RideMate.Services
                    $"{surgeLine}" +
                    $"TOTAL: ₱{Total:F2}";
         }
+    }
+
+    // Model for Admin/Backend Payout Calculation
+    public class PayoutDetails
+    {
+        public double TotalFare { get; set; }
+        public double CompanyCommission { get; set; }
+        public double VatOnCommission { get; set; }
+        public double NetCompanyRevenue { get; set; } // Commission + VAT
+        public double DriverPayout { get; set; } // Driver keeps this
     }
 }

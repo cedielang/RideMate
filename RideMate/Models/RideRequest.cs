@@ -8,6 +8,7 @@ namespace RideMate.Models
         public string PassengerPhone { get; set; }
         public string DriverId { get; set; }
         public string DriverName { get; set; }
+        public string DrivePhone { get; set; }
         public double PickupLatitude { get; set; }
         public double PickupLongitude { get; set; }
         public double DestinationLatitude { get; set; }
@@ -17,6 +18,7 @@ namespace RideMate.Models
         public DateTime RequestTime { get; set; }
         public DateTime? AcceptedTime { get; set; }
         public DateTime? CompletedTime { get; set; }
+        public string DriverPhone { get; internal set; }
     }
 
     public class LocationUpdate

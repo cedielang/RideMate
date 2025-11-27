@@ -23,16 +23,20 @@ public partial class PassengerDashboard : ContentPage
         await Navigation.PushAsync(new PassengerMapDashboard(currentPassenger));
     }
 
-    // When My Trips button is clicked
-    private async void OnMyTripsClicked(object sender, EventArgs e)
-    {
-        await DisplayAlert("My Trips", "This feature will be added soon", "OK");
-    }
+
+    
 
     // When Edit Profile button is clicked
     private async void OnEditProfileClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Edit Profile", "This feature will be added soon", "OK");
+        if (currentPassenger == null)
+        {
+            await DisplayAlert("Error", "Passenger information is not available for editing.", "OK");
+            return;
+        }
+
+        // Navigate to the EditProfilePassenger page, passing the current passenger object for data binding
+        await Navigation.PushAsync(new EditProfilePassenger(currentPassenger));
     }
 
     // When Logout button is clicked

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideMate Admin Panel</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="admin_styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1> RideMate Admin Panel</h1>
+            <div class="admin-info">
+                <span id="adminEmail">Initializing...</span> |
+                <a href="#" onclick="logout()" style="color: #f44336; text-decoration: none;">Logout</a>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" id="btn-dashboard" onclick="switchTab('dashboard')">Dashboard</button>
+            <button class="tab-button" id="btn-drivers" onclick="switchTab('drivers')">Drivers</button>
+            <button class="tab-button" id="btn-passengers" onclick="switchTab('passengers')">Passengers</button>
+            <button class="tab-button" id="btn-rides" onclick="switchTab('rides')">Rides</button>
+            <button class="tab-button" id="btn-payments" onclick="switchTab('payments')">Payments</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h2 style="margin-bottom: 20px;">Dashboard Overview</h2>
+                <button class="btn btn-unblock" onclick="loadAllData(true)" style="margin-bottom: 20px;">🔄 Refresh All Data</button>
+                <div class="stats">
+                    <div class="stat-card" style="background: #2196F3;">
+                        <h3>Total Users</h3>
+                        <div class="number" id="totalUsersCount">0</div>
+                    </div>
+                    <div class="stat-card" style="background: #FF9800;">
+                        <h3>Total Drivers</h3>
+                        <div class="number" id="totalDriversCount">0</div>
+                    </div>
+                    <div class="stat-card" style="background: #4CAF50;">
+                        <h3>Active Rides</h3>
+                        <div class="number" id="totalRidesCount">0</div>
+                    </div>
+                    <div class="stat-card" style="background: #F44336;">
+                        <h3>Blocked Users</h3>
+                        <div class="number" id="blockedUsersCount">0</div>
+                    </div>
+                </div>
+                <div id="dashboardLoading" class="loading" style="display:none;">
+                    <div class="spinner"></div>
+                    <p>Loading overview...</p>
+                </div>
+            </div>
+
+            <!-- Drivers Tab -->
+            <div id="drivers" class="tab-content">
+                <h2 style="margin-bottom: 20px;">Driver Management</h2>
+                <div class="search-bar">
+                    <input type="text" id="driverSearch" placeholder="Search by name, phone, or email..." onkeyup="filterUsers()">
+                    <select id="driverRoleFilter" onchange="filterUsers()">
+                        <option value="driver">Drivers Only</option>
+                    </select>
+                    <select id="driverStatusFilter" onchange="filterUsers()">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="blocked">Blocked</option>
+                    </select>
+                </div>
+                <div id="driversLoading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading drivers...</p>
+                </div>
+                <div id="driversTable" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Vehicle</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="driversTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Passengers Tab -->
+            <div id="passengers" class="tab-content">
+                <h2 style="margin-bottom: 20px;">Passenger Management</h2>
+                <div class="search-bar">
+                    <input type="text" id="passengerSearch" placeholder="Search by name, phone, or email..." onkeyup="filterUsers()">
+                    <select id="passengerRoleFilter" onchange="filterUsers()">
+                        <option value="passenger">Passengers Only</option>
+                    </select>
+                    <select id="passengerStatusFilter" onchange="filterUsers()">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="blocked">Blocked</option>
+                    </select>
+                </div>
+                <div id="passengersLoading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading passengers...</p>
+                </div>
+                <div id="passengersTable" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="passengersTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Rides Tab -->
+            <div id="rides" class="tab-content">
+                <h2 style="margin-bottom: 20px;">Ride History (Last 50)</h2>
+                <div id="ridesLoading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading rides...</p>
+                </div>
+                <div id="ridesTable" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ride ID</th>
+                                <th>Passenger</th>
+                                <th>Driver</th>
+                                <th>Destination</th>
+                                <th>Fare</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ridesTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Payments Tab -->
+            <div id="payments" class="tab-content">
+                <h2 style="margin-bottom: 20px;">Payment History (Last 50)</h2>
+                <div id="paymentsLoading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading payments...</p>
+                </div>
+                <div id="paymentsTable" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ride ID</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">User Details</h2>
+            <div id="modalBody"></div>
+            <button class="close-modal" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <script>
+        // CONFIGURATION VARIABLES (MUST BE DEFINED HERE)
+        const __firebase_config = `{}` // Placeholder for Canvas environment config
+        const __initial_auth_token = null // Placeholder for Canvas environment token
+        // IMPORTANT: Replace YOUR-PROJECT-ID with your actual ID for Cloud Functions
+        const FUNCTIONS_BASE_URL = 'https://us-central1-YOUR-PROJECT-ID.cloudfunctions.net';
+    </script>
+    <!-- Link to external JavaScript logic -->
+    <script src="admin.js"></script>
+</body>
+</html>

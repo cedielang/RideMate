@@ -11,16 +11,16 @@ public class Context_CancellationListenerImplementor
 	public static final String __md_methods;
 	static {
 		__md_methods = 
-			"n_cancelled:(Lio/grpc/Context;)V:GetCancelled_Lio_grpc_Context_Handler:Xamarin.Grpc.Context/ICancellationListenerInvoker, Xamarin.Grpc.Api\n" +
+			"n_cancelled:(Lio/grpc/Context;)V:GetCancelled_Lio_grpc_Context_Handler:Xamarin.Grpc.Context/ICancellationListenerInvoker, Xamarin.Grpc.Context\n" +
 			"";
-		mono.android.Runtime.register ("Xamarin.Grpc.Context+ICancellationListenerImplementor, Xamarin.Grpc.Api", Context_CancellationListenerImplementor.class, __md_methods);
+		mono.android.Runtime.register ("Xamarin.Grpc.Context+ICancellationListenerImplementor, Xamarin.Grpc.Context", Context_CancellationListenerImplementor.class, __md_methods);
 	}
 
 	public Context_CancellationListenerImplementor ()
 	{
 		super ();
 		if (getClass () == Context_CancellationListenerImplementor.class) {
-			mono.android.TypeManager.Activate ("Xamarin.Grpc.Context+ICancellationListenerImplementor, Xamarin.Grpc.Api", "", this, new java.lang.Object[] {  });
+			mono.android.TypeManager.Activate ("Xamarin.Grpc.Context+ICancellationListenerImplementor, Xamarin.Grpc.Context", "", this, new java.lang.Object[] {  });
 		}
 	}
 

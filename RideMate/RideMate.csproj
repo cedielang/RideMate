@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;net9.0-maccatalyst</TargetFrameworks>
@@ -76,15 +76,17 @@
 
 	<ItemGroup>
 		<PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+		<PackageReference Include="FirebaseAdmin" Version="3.4.0" />
 		<PackageReference Include="Google.Apis" Version="1.72.0" />
 		<PackageReference Include="Google.Apis.Auth" Version="1.72.0" />
-		<PackageReference Include="Google.Cloud.Firestore" Version="3.12.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Plugin.CloudFirestore" Version="4.1.0" />
 		<PackageReference Include="Plugin.Firebase.Core" Version="3.1.1" />
 		<PackageReference Include="Plugin.Firebase.Auth" Version="3.1.1" />
-		<PackageReference Include="Plugin.Firebase.Firestore" Version="3.1.1" />
+		<PackageReference Include="System.Collections" Version="4.3.0" />
+		<PackageReference Include="System.Linq" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -92,6 +94,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="DriverDashboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="EditProfileDriver.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="EditProfilePassenger.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Login.xaml">

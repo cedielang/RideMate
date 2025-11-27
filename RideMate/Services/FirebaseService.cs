@@ -40,7 +40,7 @@ namespace RideMate.Services
         // Example: bool exists = await firebase.DriverPhoneExists("+639123456789");
         public async Task<bool> DriverPhoneExists(string phone)
         {
-            return await firestore.DriverPhoneExists(phone);
+            return await firestore.PhoneExists(phone);
         }
 
         // Update driver's online/offline status

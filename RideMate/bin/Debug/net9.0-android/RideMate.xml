@@ -4,6 +4,27 @@
         <name>RideMate</name>
     </assembly>
     <members>
+        <member name="M:RideMate.Services.CloudFirestoreService.GetDocObject``1(Plugin.CloudFirestore.IDocumentSnapshot)">
+            <summary>
+            Retrieves and maps a single document snapshot to a C# object.
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.CloudFirestoreService.GetQueryObjects``1(Plugin.CloudFirestore.IQuerySnapshot)">
+            <summary>
+            Retrieves and maps all documents from a query snapshot to a List of C# objects.
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.CloudFirestoreService.TryGet``1(Plugin.CloudFirestore.IDocumentSnapshot,System.String,``0)">
+            <summary>
+            Helper for field lookups that gracefully handles potential conversion errors.
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.CloudFirestoreService.QuerySingleUserByPhoneAsync``1(System.String,System.String)">
+            <summary>
+            Retrieves ALL user documents and filters using C# LINQ (Workaround for query method failure).
+            WARNING: Inefficient on large datasets.
+            </summary>
+        </member>
         <member name="M:RideMate.Services.FareCalculatorService.CalculateFare(System.Double,System.Double,System.Double)">
             <summary>
             Calculates total fare based on distance, time, and an optional surge multiplier.
@@ -13,6 +34,56 @@
             <summary>
             Calculates total fare and provides a full breakdown, including surge.
             </summary>
+        </member>
+        <member name="M:RideMate.Services.FareCalculatorService.CalculateDriverPayoutAndTax(System.Double)">
+            <summary>
+            Calculates the driver's net payout and the company's commission, 
+            including mandatory VAT on the commission.
+            </summary>
+            <param name="totalFareReceived">The total amount the passenger paid.</param>
+        </member>
+        <member name="M:RideMate.Services.RideMonitor.GetIncomingRequestsAsync">
+            <summary>
+            Retrieves a snapshot of all incoming ride requests (Status == "Requested").
+            This method is intended to be called repeatedly on a timer by the Driver Dashboard.
+            </summary>
+            <returns>A List of currently requested rides.</returns>
+        </member>
+        <member name="M:RideMate.Services.RideMonitor.GetActiveRideStateAsync(System.String)">
+            <summary>
+            Retrieves a snapshot of a single, specific ride document.
+            This is intended to be called repeatedly on a timer by the Passenger Dashboard.
+            </summary>
+            <returns>The current state of the ride, or null if not found.</returns>
+        </member>
+        <member name="T:RideMate.Services.RideService">
+            <summary>
+            RideService acts as a wrapper layer, converting business logic calls 
+            into secure asynchronous calls to the CloudFirestoreService.
+            It ensures all persistence and status updates go to Firebase.
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.RideService.UpdateDriverStatus(System.String,System.Boolean)">
+            <summary>
+            REQUIRED FIX: Updates the driver's online status in the Firestore 'users' collection.
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.RideService.UpdateDriverLocation(System.String,System.Double,System.Double)">
+            <summary>
+            Updates driver's location in the Firestore 'users' collection.
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.RideService.CreateDriverRideOffer(RideMate.Models.RideRequest)">
+            <summary>
+            Driver creates a ride offer (saves a document to the 'rides' collection).
+            </summary>
+        </member>
+        <member name="M:RideMate.Services.RideService.GetRidesByDestinationAsync(System.String)">
+            <summary>
+            Get available rides for passengers (must search Firestore).
+            NOTE: This replaces the old local list filtering.
+            </summary>
+            <param name="destination">The destination keyword to search for.</param>
         </member>
         <member name="T:RideMate.Resource">
             <summary>

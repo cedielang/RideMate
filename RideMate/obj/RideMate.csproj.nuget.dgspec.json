@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[1.6.0, )"
             },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            },
             "Google.Apis": {
               "target": "Package",
               "version": "[1.72.0, )"
@@ -73,10 +77,6 @@
             "Google.Apis.Auth": {
               "target": "Package",
               "version": "[1.72.0, )"
-            },
-            "Google.Cloud.Firestore": {
-              "target": "Package",
-              "version": "[3.12.0, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
@@ -96,6 +96,10 @@
               "target": "Package",
               "version": "[13.0.4, )"
             },
+            "Plugin.CloudFirestore": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Plugin.Firebase.Auth": {
               "target": "Package",
               "version": "[3.1.1, )"
@@ -104,9 +108,13 @@
               "target": "Package",
               "version": "[3.1.1, )"
             },
-            "Plugin.Firebase.Firestore": {
+            "System.Collections": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[4.3.0, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
@@ -137,6 +145,10 @@
               "target": "Package",
               "version": "[1.6.0, )"
             },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            },
             "Google.Apis": {
               "target": "Package",
               "version": "[1.72.0, )"
@@ -144,10 +156,6 @@
             "Google.Apis.Auth": {
               "target": "Package",
               "version": "[1.72.0, )"
-            },
-            "Google.Cloud.Firestore": {
-              "target": "Package",
-              "version": "[3.12.0, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
@@ -167,6 +175,10 @@
               "target": "Package",
               "version": "[13.0.4, )"
             },
+            "Plugin.CloudFirestore": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Plugin.Firebase.Auth": {
               "target": "Package",
               "version": "[3.1.1, )"
@@ -175,9 +187,13 @@
               "target": "Package",
               "version": "[3.1.1, )"
             },
-            "Plugin.Firebase.Firestore": {
+            "System.Collections": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[4.3.0, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
@@ -209,6 +225,10 @@
               "target": "Package",
               "version": "[1.6.0, )"
             },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            },
             "Google.Apis": {
               "target": "Package",
               "version": "[1.72.0, )"
@@ -216,10 +236,6 @@
             "Google.Apis.Auth": {
               "target": "Package",
               "version": "[1.72.0, )"
-            },
-            "Google.Cloud.Firestore": {
-              "target": "Package",
-              "version": "[3.12.0, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
@@ -233,6 +249,10 @@
               "target": "Package",
               "version": "[13.0.4, )"
             },
+            "Plugin.CloudFirestore": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "Plugin.Firebase.Auth": {
               "target": "Package",
               "version": "[3.1.1, )"
@@ -241,9 +261,13 @@
               "target": "Package",
               "version": "[3.1.1, )"
             },
-            "Plugin.Firebase.Firestore": {
+            "System.Collections": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[4.3.0, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [

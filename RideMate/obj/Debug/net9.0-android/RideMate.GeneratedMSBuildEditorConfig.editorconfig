@@ -48,6 +48,18 @@ build_metadata.AdditionalFiles.ManifestResourceName = RideMate.DriverSignUp.xaml
 build_metadata.AdditionalFiles.TargetPath = DriverSignUp.xaml
 build_metadata.AdditionalFiles.RelativePath = DriverSignUp.xaml
 
+[C:/Users/USER/source/repos/RideMate/RideMate/EditProfileDriver.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.EditProfileDriver.xaml
+build_metadata.AdditionalFiles.TargetPath = EditProfileDriver.xaml
+build_metadata.AdditionalFiles.RelativePath = EditProfileDriver.xaml
+
+[C:/Users/USER/source/repos/RideMate/RideMate/EditProfilePassenger.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.EditProfilePassenger.xaml
+build_metadata.AdditionalFiles.TargetPath = EditProfilePassenger.xaml
+build_metadata.AdditionalFiles.RelativePath = EditProfilePassenger.xaml
+
 [C:/Users/USER/source/repos/RideMate/RideMate/ForgotPasswordPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = RideMate.ForgotPasswordPage.xaml
@@ -143,3 +155,9 @@ build_metadata.AdditionalFiles.GenKind = Css
 build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Resources.Raw.dist.leaflet.css
 build_metadata.AdditionalFiles.TargetPath = Resources\Raw\dist\leaflet.css
 build_metadata.AdditionalFiles.RelativePath = Resources\Raw\dist\leaflet.css
+
+[C:/Users/USER/source/repos/RideMate/RideMate/Services/AdminPanel/admin_styles.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = RideMate.Services.AdminPanel.admin_styles.css
+build_metadata.AdditionalFiles.TargetPath = Services\AdminPanel\admin_styles.css
+build_metadata.AdditionalFiles.RelativePath = Services\AdminPanel\admin_styles.css
